@@ -1,0 +1,225 @@
+// 控制浏览器如何计算元素的总大小的功能类。
+.u-box-border {
+  box-sizing: border-box;
+}
+
+.u-box-content {
+  box-sizing: content-box;
+}
+
+/* 控制元素显示类型的功能类 */
+$display-list: block,
+inline-block,
+inline,
+inline-flex,
+none;
+
+@each $name in $display-list {
+
+  // 缩写版，结果如： u-block
+  @if $name=='none' {
+    $value: $name;
+    $name : hidden;
+
+    .u-#{$name} {
+      display: $value;
+    }
+  }
+
+  @else {
+    .u-#{$name} {
+      display: $name;
+    }
+  }
+}
+
+/* flex */
+.u-flex {
+  /* #ifndef APP-NVUE */
+  display       : flex;
+  /* #endif */
+  flex-direction: row;
+  align-items   : center;
+}
+
+.u-flex-col {
+  /* #ifndef APP-NVUE */
+  display       : flex;
+  /* #endif */
+  flex-direction: column;
+}
+
+// 定义flex等分
+@for $i from 0 through 12 {
+  .u-flex-#{$i} {
+    flex: $i;
+  }
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.u-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.u-col-center {
+  align-items: center;
+}
+
+.u-col-top {
+  align-items: flex-start;
+}
+
+.u-col-bottom {
+  align-items: flex-end;
+}
+
+$flex-content: left flex-start,
+center center,
+right flex-end,
+between space-between,
+around space-around;
+
+// flex 水平对齐
+@each $name,
+$value in $flex-content {
+
+  // 缩写版，结果如： u-row-left
+  .u-row-#{$name} {
+    justify-content: $value;
+  }
+}
+
+// 字体对齐
+@each $name in left,
+center,
+right {
+
+  // 缩写版，结果如： u-text-left
+  .u-text-#{$name} {
+    text-align: $name;
+  }
+}
+
+// 定义字体(px)单位，小于20都为px单位字体
+@for $i from 9 to 20 {
+  .u-font-#{$i} {
+    font-size: $i + px;
+  }
+}
+
+// 定义字体(rpx)单位，大于或等于20的都为rpx单位字体
+@for $i from 20 through 40 {
+  .u-font-#{$i} {
+    font-size: $i + rpx;
+  }
+}
+
+$font-weight: (light 300,
+  normal 400,
+  medium 500,
+  semibold 600,
+  bold 700);
+
+// 字体粗细
+@each $name,
+$value in $font-weight {
+
+  // 缩写版，结果如： u-font-light
+  .u-font-#{$name} {
+    font-weight: $value;
+  }
+}
+
+// 定义内外边距，历遍1-80
+@for $i from 0 through 80 {
+
+  // 只要双数和能被5除尽的数
+  @if $i % 2==0 or $i % 5==0 {
+
+    // 得出：u-margin-30或者u-m-30
+    .u-radius-#{$i} {
+      border-top-left-radius    : $i + rpx;
+      border-top-right-radius   : $i + rpx;
+      border-bottom-right-radius: $i + rpx;
+      border-bottom-left-radius : $i + rpx;
+      overflow                  : hidden;
+    }
+
+    // 得出：u-margin-30或者u-m-30
+    .u-margin-#{$i},
+    .u-m-#{$i} {
+      margin: $i + rpx !important;
+    }
+
+    // 得出：u-margin-x-30或者u-m-x-30
+    .u-margin-x-#{$i},
+    .u-m-x-#{$i} {
+      margin-left : $i + rpx !important;
+      margin-right: $i + rpx !important;
+    }
+
+    // 得出：u-margin-y-30或者u-m-y-30
+    .u-margin-y-#{$i},
+    .u-m-y-#{$i} {
+      margin-top   : $i + rpx !important;
+      margin-bottom: $i + rpx !important;
+    }
+
+    // 得出：u-padding-30或者u-p-30
+    .u-padding-#{$i},
+    .u-p-#{$i} {
+      padding: $i + rpx !important;
+    }
+
+    // 得出：u-padding-x-30或者u-p-x-30
+    .u-padding-x-#{$i},
+    .u-p-x-#{$i} {
+      padding-left : $i + rpx !important;
+      padding-right: $i + rpx !important;
+    }
+
+    // 得出：u-padding-y-30或者u-p-y-30
+    .u-padding-y-#{$i},
+    .u-p-y-#{$i} {
+      padding-top   : $i + rpx !important;
+      padding-bottom: $i + rpx !important;
+    }
+
+    @each $short,
+    $long in l left,
+    t top,
+    r right,
+    b bottom {
+
+      // 缩写版，结果如： u-m-l-30
+      // 定义外边距
+      .u-m-#{$short}-#{$i} {
+        margin-#{$long}: $i + rpx !important;
+      }
+
+      // 定义内边距
+      .u-p-#{$short}-#{$i} {
+        padding-#{$long}: $i + rpx !important;
+      }
+
+      // 完整版，结果如：u-margin-left-30
+      // 定义外边距
+      .u-margin-#{$long}-#{$i} {
+        margin-#{$long}: $i + rpx !important;
+      }
+
+      // 定义内边距
+      .u-padding-#{$long}-#{$i} {
+        padding-#{$long}: $i + rpx !important;
+      }
+    }
+  }
+}
+
+.u-width-full,
+.u-w-full {
+  width: 100%;
+}

@@ -1,0 +1,30 @@
+u--text,
+u--form,
+u-row,
+u-col,
+u-form,
+u-form-item,
+u-cell,
+u-button {
+  display: block;
+}
+
+/* u-popup start */
+u-popup  u-overlay  .u-transition {
+  transition-duration: 350ms;
+  transition-timing-function: ease-out;
+  position: fixed;
+  inset: 0px;
+  z-index: 10070;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+u-popup  u-transition  .u-transition {
+  z-index: 10075;
+  position: fixed;
+  display: flex;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+/* u-popup end */
